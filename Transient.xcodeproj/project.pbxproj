@@ -1,0 +1,314 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4F38FFD1158CEE26006F02E4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F38FFD0158CEE26006F02E4 /* Cocoa.framework */; };
+		4F38FFDB158CEE26006F02E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F38FFD9158CEE26006F02E4 /* InfoPlist.strings */; };
+		4F38FFDD158CEE26006F02E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F38FFDC158CEE26006F02E4 /* main.m */; };
+		4F38FFE1158CEE26006F02E4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4F38FFDF158CEE26006F02E4 /* Credits.rtf */; };
+		4F38FFE4158CEE26006F02E4 /* TRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F38FFE3158CEE26006F02E4 /* TRAppDelegate.m */; };
+		4F38FFE7158CEE27006F02E4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F38FFE5158CEE27006F02E4 /* MainMenu.xib */; };
+		4F38FFEA158CEE27006F02E4 /* Transient.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F38FFE8158CEE27006F02E4 /* Transient.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4F38FFCC158CEE26006F02E4 /* Transient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F38FFD0158CEE26006F02E4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		4F38FFD3158CEE26006F02E4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		4F38FFD4158CEE26006F02E4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		4F38FFD5158CEE26006F02E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4F38FFD8158CEE26006F02E4 /* Transient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Transient-Info.plist"; sourceTree = "<group>"; };
+		4F38FFDA158CEE26006F02E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4F38FFDC158CEE26006F02E4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4F38FFDE158CEE26006F02E4 /* Transient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Transient-Prefix.pch"; sourceTree = "<group>"; };
+		4F38FFE0158CEE26006F02E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		4F38FFE2158CEE26006F02E4 /* TRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TRAppDelegate.h; sourceTree = "<group>"; };
+		4F38FFE3158CEE26006F02E4 /* TRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TRAppDelegate.m; sourceTree = "<group>"; };
+		4F38FFE6158CEE27006F02E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		4F38FFE9158CEE27006F02E4 /* Transient.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Transient.xcdatamodel; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4F38FFC9158CEE26006F02E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F38FFD1158CEE26006F02E4 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4F38FFC1158CEE26006F02E4 = {
+			isa = PBXGroup;
+			children = (
+				4F38FFD6158CEE26006F02E4 /* Transient */,
+				4F38FFCF158CEE26006F02E4 /* Frameworks */,
+				4F38FFCD158CEE26006F02E4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4F38FFCD158CEE26006F02E4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4F38FFCC158CEE26006F02E4 /* Transient.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4F38FFCF158CEE26006F02E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4F38FFD0158CEE26006F02E4 /* Cocoa.framework */,
+				4F38FFD2158CEE26006F02E4 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4F38FFD2158CEE26006F02E4 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4F38FFD3158CEE26006F02E4 /* AppKit.framework */,
+				4F38FFD4158CEE26006F02E4 /* CoreData.framework */,
+				4F38FFD5158CEE26006F02E4 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		4F38FFD6158CEE26006F02E4 /* Transient */ = {
+			isa = PBXGroup;
+			children = (
+				4F38FFE2158CEE26006F02E4 /* TRAppDelegate.h */,
+				4F38FFE3158CEE26006F02E4 /* TRAppDelegate.m */,
+				4F38FFE5158CEE27006F02E4 /* MainMenu.xib */,
+				4F38FFE8158CEE27006F02E4 /* Transient.xcdatamodeld */,
+				4F38FFD7158CEE26006F02E4 /* Supporting Files */,
+			);
+			path = Transient;
+			sourceTree = "<group>";
+		};
+		4F38FFD7158CEE26006F02E4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4F38FFD8158CEE26006F02E4 /* Transient-Info.plist */,
+				4F38FFD9158CEE26006F02E4 /* InfoPlist.strings */,
+				4F38FFDC158CEE26006F02E4 /* main.m */,
+				4F38FFDE158CEE26006F02E4 /* Transient-Prefix.pch */,
+				4F38FFDF158CEE26006F02E4 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4F38FFCB158CEE26006F02E4 /* Transient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F38FFED158CEE27006F02E4 /* Build configuration list for PBXNativeTarget "Transient" */;
+			buildPhases = (
+				4F38FFC8158CEE26006F02E4 /* Sources */,
+				4F38FFC9158CEE26006F02E4 /* Frameworks */,
+				4F38FFCA158CEE26006F02E4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Transient;
+			productName = Transient;
+			productReference = 4F38FFCC158CEE26006F02E4 /* Transient.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4F38FFC3158CEE26006F02E4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = TR;
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 4F38FFC6158CEE26006F02E4 /* Build configuration list for PBXProject "Transient" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4F38FFC1158CEE26006F02E4;
+			productRefGroup = 4F38FFCD158CEE26006F02E4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4F38FFCB158CEE26006F02E4 /* Transient */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4F38FFCA158CEE26006F02E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F38FFDB158CEE26006F02E4 /* InfoPlist.strings in Resources */,
+				4F38FFE1158CEE26006F02E4 /* Credits.rtf in Resources */,
+				4F38FFE7158CEE27006F02E4 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4F38FFC8158CEE26006F02E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F38FFDD158CEE26006F02E4 /* main.m in Sources */,
+				4F38FFE4158CEE26006F02E4 /* TRAppDelegate.m in Sources */,
+				4F38FFEA158CEE27006F02E4 /* Transient.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4F38FFD9158CEE26006F02E4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4F38FFDA158CEE26006F02E4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		4F38FFDF158CEE26006F02E4 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4F38FFE0158CEE26006F02E4 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		4F38FFE5158CEE27006F02E4 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4F38FFE6158CEE27006F02E4 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4F38FFEB158CEE27006F02E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		4F38FFEC158CEE27006F02E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		4F38FFEE158CEE27006F02E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Transient/Transient-Prefix.pch";
+				INFOPLIST_FILE = "Transient/Transient-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		4F38FFEF158CEE27006F02E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Transient/Transient-Prefix.pch";
+				INFOPLIST_FILE = "Transient/Transient-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4F38FFC6158CEE26006F02E4 /* Build configuration list for PBXProject "Transient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F38FFEB158CEE27006F02E4 /* Debug */,
+				4F38FFEC158CEE27006F02E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4F38FFED158CEE27006F02E4 /* Build configuration list for PBXNativeTarget "Transient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F38FFEE158CEE27006F02E4 /* Debug */,
+				4F38FFEF158CEE27006F02E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4F38FFE8158CEE27006F02E4 /* Transient.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4F38FFE9158CEE27006F02E4 /* Transient.xcdatamodel */,
+			);
+			currentVersion = 4F38FFE9158CEE27006F02E4 /* Transient.xcdatamodel */;
+			path = Transient.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 4F38FFC3158CEE26006F02E4 /* Project object */;
+}

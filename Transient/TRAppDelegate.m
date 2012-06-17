@@ -181,6 +181,8 @@
         NSLog(@"Error: %@", error);
     }
     
+    result = [result sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]]];
+    
     return result;
 }
 

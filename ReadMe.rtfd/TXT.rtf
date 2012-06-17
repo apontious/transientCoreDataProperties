@@ -1,0 +1,47 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 LucidaGrande;}
+{\colortbl;\red255\green255\blue255;\red26\green26\blue26;\red5\green49\blue103;}
+\margl1440\margr1440\vieww18260\viewh15660\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 This sample project goes along with my post on my blog The Powers of Observation:\
+\
+	{\field{\*\fldinst{HYPERLINK "http://subjectiveobserver.wordpress.com/2012/06/17/fleeting/"}}{\fldrslt http://subjectiveobserver.wordpress.com/2012/06/17/fleeting/}}\
+\
+To guard against bit rot, the entirety of the post is reproduced below.\
+\
+\'97 Andrew Pontious\
+6/16/2012\
+\
+\pard\pardeftab720\sa140
+
+\f1\b\fs40 \cf2 Fleeting\
+\pard\pardeftab720\sa300
+
+\b0\fs26 \cf2 I had a problem recently with Core Data transient properties, my own fault.\
+What I hoped they would be was full-fledged members of the database which just happened not to be saved to disk.\
+What they actually are is glorified instance variables. The trouble with using a custom subclass ivar is that its value is only present in the specific object you set it on. If you get a different object representing the same entity, say from another context, it won\'92t have that value. These can lead to lots of problems.\
+I wrote a sample Mac app, available on {\field{\*\fldinst{HYPERLINK "https://github.com/apontious/transientCoreDataProperties"}}{\fldrslt \cf3 \ul \ulc3 github}}, that demonstrates the problem. Here\'92s me setting the \'93name\'94 property for a couple of entities:\
+\pard\pardeftab720\sa300
+
+\f0\fs24 \cf0 {{\NeXTGraphic core-data-transient-properties-1.png \width12340 \height8520 \noorient
+}¬}\pard\pardeftab720\sa300
+
+\f1\fs26 \cf2 \
+Here\'92s me using the \'93Refresh\'94 button to use a second managed object context to retrieve those same entities:\
+\pard\pardeftab720\sa300
+
+\f0\fs24 \cf0 {{\NeXTGraphic core-data-transient-properties-2.png \width12340 \height8520 \noorient
+}¬}\pard\pardeftab720\sa300
+
+\f1\fs26 \cf2 \
+Names are gone! (And pointer values are different.) If I change the name attribute to not be transient, the names are preserved, even though the pointer values are still different:\
+\pard\pardeftab720\sa300
+
+\f0\fs24 \cf0 {{\NeXTGraphic core-data-transient-properties-3.png \width12340 \height8520 \noorient
+}¬}\pard\pardeftab720\sa300
+
+\f1\fs26 \cf2 \
+I\'92m sliding over a lot of details here. {\field{\*\fldinst{HYPERLINK "http://www.2pi.dk/tech/cocoa/transient_properties.html"}}{\fldrslt \cf3 \ul \ulc3 This post}} by Jakob Stoklund Olesen has more information, but since it\'92s from 2007, it may be out of date. (It\'92s still the first google hit for \'93Core data transient properties\'94, however.)
+\f0\fs24 \cf0 \
+}

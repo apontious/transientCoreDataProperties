@@ -7,7 +7,7 @@
 //  Some right reserved: http://opensource.org/licenses/mit-license.php
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 @interface TRAppDelegate : NSObject
 

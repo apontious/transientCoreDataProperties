@@ -21,6 +21,8 @@
 
 @property (nonatomic, copy) NSArray<NSManagedObject *> *forgettables;
 
+@property (nonatomic) NSUInteger order;
+
 @end
 
 @implementation TRAppDelegate
@@ -90,6 +92,9 @@
     NSManagedObject *forgettable = [NSEntityDescription insertNewObjectForEntityForName:@"Forgettable" inManagedObjectContext:moc];
     [forgettable setValue:name forKey:@"name"];
     
+    self.order++;
+    [forgettable setValue:@(self.order) forKey:@"order"];
+
     NSError *error;
     if ([moc save:&error] == NO) {
         NSLog(@"Error: %@", error);
@@ -125,6 +130,8 @@
         NSLog(@"Error: %@", error);
     }
 
+    result = [result sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES selector:@selector(compare:)]]];
+
     self.forgettables = result;
     [self.tableView reloadData];
 }
@@ -142,6 +149,8 @@
     
     if ([tableColumn.identifier isEqualToString:@"pointer"] == YES) {
         result = [NSString stringWithFormat:@"%p", forgettable];
+    } else if ([tableColumn.identifier isEqualToString:@"order"] == YES) {
+        result = [forgettable valueForKey:@"order"];
     } else if ([tableColumn.identifier isEqualToString:@"name"] == YES) {
         NSString *name = [forgettable valueForKey:@"name"];
         if (name == nil) {

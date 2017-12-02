@@ -17,9 +17,7 @@
 
 @property (nonatomic, weak) IBOutlet NSWindow *window;
 
-@property (readonly, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (readonly, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (readonly, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, nonatomic) NSPersistentContainer *persistentContainer;
 
 @property (nonatomic, copy) NSArray<NSManagedObject *> *forgettables;
 
@@ -27,74 +25,59 @@
 
 @implementation TRAppDelegate
 
-@synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
-@synthesize managedObjectModel = __managedObjectModel;
-@synthesize managedObjectContext = __managedObjectContext;
+#pragma mark - Core Data stack
+
+@synthesize persistentContainer = _persistentContainer;
+
+- (NSPersistentContainer *)persistentContainer {
+    // The persistent container for the application. This implementation creates and returns a container, having loaded the store for the application to it.
+    @synchronized (self) {
+        if (_persistentContainer == nil) {
+            _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"Transient"];
+
+            NSPersistentStoreDescription *storeDescription = [[NSPersistentStoreDescription alloc] init];
+            storeDescription.type = NSInMemoryStoreType;
+            _persistentContainer.persistentStoreDescriptions = @[storeDescription];
+
+            [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
+                if (error != nil) {
+                    // Replace this implementation with code to handle the error appropriately.
+                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+
+                    /*
+                     Typical reasons for an error here include:
+                     * The parent directory does not exist, cannot be created, or disallows writing.
+                     * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                     * The device is out of space.
+                     * The store could not be migrated to the current model version.
+                     Check the error message to determine what the actual problem was.
+                     */
+                    NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+                    abort();
+                }
+            }];
+        }
+    }
+
+    return _persistentContainer;
+}
+
+- (NSManagedObjectContext *)managedObjectContext {
+    return self.persistentContainer.viewContext;
+}
+
+#pragma mark - Core Data Undo support
+
+- (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
+    // Returns the NSUndoManager for the application. In this case, the manager returned is that of the managed object context for the application.
+    return self.persistentContainer.viewContext.undoManager;
+}
+
+#pragma mark -
 
 // apontious 6/16/2012: Must use this access point, instead of applicationDidFinishLaunching:, if we want to do things before e.g. table view is populated.
 - (void)awakeFromNib {
     [self refresh:nil];
-}
-
-// Creates if necessary and returns the managed object model for the application.
-- (NSManagedObjectModel *)managedObjectModel {
-    if (__managedObjectModel) {
-        return __managedObjectModel;
-    }
-	
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Transient" withExtension:@"momd"];
-    __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    return __managedObjectModel;
-}
-
-// Returns the persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. (The directory for the store is created, if necessary.)
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    if (__persistentStoreCoordinator != nil) {
-        return __persistentStoreCoordinator;
-    }
-    
-    NSManagedObjectModel *mom = [self managedObjectModel];
-    if (mom == nil) {
-        NSLog(@"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
-        return nil;
-    }
-
-    NSError *error;
-
-    NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
-    if (![coordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error]) {
-        [[NSApplication sharedApplication] presentError:error];
-        return nil;
-    }
-    __persistentStoreCoordinator = coordinator;
-    
-    return __persistentStoreCoordinator;
-}
-
-// Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) 
-- (NSManagedObjectContext *)managedObjectContext {
-    if (__managedObjectContext != nil) {
-        return __managedObjectContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator == nil) {
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setValue:@"Failed to initialize the store" forKey:NSLocalizedDescriptionKey];
-        [dict setValue:@"There was an error building up the data file." forKey:NSLocalizedFailureReasonErrorKey];
-        NSError *error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
-        [[NSApplication sharedApplication] presentError:error];
-        return nil;
-    }
-    __managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [__managedObjectContext setPersistentStoreCoordinator:coordinator];
-
-    return __managedObjectContext;
-}
-
-// Returns the NSUndoManager for the application. In this case, the manager returned is that of the managed object context for the application.
-- (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
-    return [[self managedObjectContext] undoManager];
 }
 
 #pragma mark Actions
@@ -121,7 +104,7 @@
 }
 
 // apontious 12/2/2017: Previously, we used a different context each time we refreshed.
-// But I don't want to do that anymore, because I want to switch to NSPersistentContainer, which has its own, single main thread context.
+// But I don't want to do that anymore, because I have switched to NSPersistentContainer, which has its own, single main thread context.
 // Turns out, if you don't have a reference to a managed object instance, it will disappear and will be refetched, which is what we want.
 - (IBAction)refresh:(id)sender {
     self.forgettables = nil;

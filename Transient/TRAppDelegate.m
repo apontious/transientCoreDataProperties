@@ -85,12 +85,12 @@
 - (IBAction)addName:(id)sender {
     NSManagedObjectContext *moc = self.managedObjectContext;
 
-    NSString *name = [self.textField stringValue];
+    NSString *name = self.textField.stringValue;
     
     NSManagedObject *forgettable = [NSEntityDescription insertNewObjectForEntityForName:@"Forgettable" inManagedObjectContext:moc];
     [forgettable setValue:name forKey:@"name"];
     
-    NSError *error = nil;
+    NSError *error;
     if ([moc save:&error] == NO) {
         NSLog(@"Error: %@", error);
     }

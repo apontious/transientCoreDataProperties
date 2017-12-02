@@ -26,7 +26,6 @@
 		4F38FFD8158CEE26006F02E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F38FFDA158CEE26006F02E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4F38FFDC158CEE26006F02E4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4F38FFDE158CEE26006F02E4 /* Transient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Transient-Prefix.pch"; sourceTree = "<group>"; };
 		4F38FFE0158CEE26006F02E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		4F38FFE2158CEE26006F02E4 /* TRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TRAppDelegate.h; sourceTree = "<group>"; };
 		4F38FFE3158CEE26006F02E4 /* TRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TRAppDelegate.m; sourceTree = "<group>"; };
@@ -102,7 +101,6 @@
 				4F38FFD8158CEE26006F02E4 /* Info.plist */,
 				4F38FFD9158CEE26006F02E4 /* InfoPlist.strings */,
 				4F38FFDC158CEE26006F02E4 /* main.m */,
-				4F38FFDE158CEE26006F02E4 /* Transient-Prefix.pch */,
 				4F38FFDF158CEE26006F02E4 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
@@ -259,8 +257,6 @@
 		4F38FFEE158CEE27006F02E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Transient/Transient-Prefix.pch";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Transient/Info.plist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -271,8 +267,6 @@
 		4F38FFEF158CEE27006F02E4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Transient/Transient-Prefix.pch";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Transient/Info.plist;
 				PRODUCT_NAME = "$(TARGET_NAME)";

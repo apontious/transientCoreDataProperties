@@ -15,7 +15,7 @@
 @property (nonatomic, weak) IBOutlet NSTextField *textField;
 @property (nonatomic, weak) IBOutlet NSTableView *tableView;
 
-@property (weak) IBOutlet NSWindow *window;
+@property (nonatomic, weak) IBOutlet NSWindow *window;
 
 @property (readonly, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, nonatomic) NSManagedObjectModel *managedObjectModel;

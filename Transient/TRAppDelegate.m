@@ -36,23 +36,11 @@
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize managedObjectContext = __managedObjectContext;
 
-// Apontious 6/16/2012: Must use this access point, instead of applicationDidFinishLaunching:, if we want to do things before e.g. table view is populated.
+// apontious 6/16/2012: Must use this access point, instead of applicationDidFinishLaunching:, if we want to do things before e.g. table view is populated.
 - (void)awakeFromNib {
-    // Apontious 6/16/2012: We don't want the previous session's data cluttering things up, so delete it.
-    NSURL *url = [[self applicationFilesDirectory] URLByAppendingPathComponent:@"Transient.storedata"];
-    
-    [[NSFileManager defaultManager] removeItemAtURL:url error:nil];
-
     _managedObjectContexts = [NSMutableArray array];
     [_managedObjectContexts addObject:self.managedObjectContext];
     [self.managedObjectContext setStalenessInterval:0.0];
-}
-
-// Returns the directory the application uses to store the Core Data store file. This code uses a directory named "edge.Transient" in the user's Application Support directory.
-- (NSURL *)applicationFilesDirectory {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *appSupportURL = [[fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] lastObject];
-    return [appSupportURL URLByAppendingPathComponent:@"edge.Transient"];
 }
 
 // Creates if necessary and returns the managed object model for the application.
@@ -77,39 +65,11 @@
         NSLog(@"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
         return nil;
     }
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *applicationFilesDirectory = [self applicationFilesDirectory];
-    NSError *error = nil;
-    
-    NSDictionary *properties = [applicationFilesDirectory resourceValuesForKeys:[NSArray arrayWithObject:NSURLIsDirectoryKey] error:&error];
-    
-    if (properties == nil) {
-        BOOL ok = NO;
-        if ([error code] == NSFileReadNoSuchFileError) {
-            ok = [fileManager createDirectoryAtPath:[applicationFilesDirectory path] withIntermediateDirectories:YES attributes:nil error:&error];
-        }
-        if (ok == NO) {
-            [[NSApplication sharedApplication] presentError:error];
-            return nil;
-        }
-    } else {
-        if ([[properties objectForKey:NSURLIsDirectoryKey] boolValue] == NO) {
-            // Customize and localize this error.
-            NSString *failureDescription = [NSString stringWithFormat:@"Expected a folder to store application data, found a file (%@).", [applicationFilesDirectory path]];
-            
-            NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            [dict setValue:failureDescription forKey:NSLocalizedDescriptionKey];
-            error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:101 userInfo:dict];
-            
-            [[NSApplication sharedApplication] presentError:error];
-            return nil;
-        }
-    }
-    
-    NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"Transient.storedata"];
+
+    NSError *error;
+
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
-    if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]) {
+    if (![coordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&error]) {
         [[NSApplication sharedApplication] presentError:error];
         return nil;
     }

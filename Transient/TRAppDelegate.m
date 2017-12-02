@@ -9,15 +9,32 @@
 
 #import "TRAppDelegate.h"
 
-@interface TRAppDelegate ()
+@interface TRAppDelegate () <NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate>
 
 @property (nonatomic, retain) IBOutlet NSButton *addNameButton;
 @property (nonatomic, retain) IBOutlet NSTextField *textField;
 @property (nonatomic, retain) IBOutlet NSTableView *tableView;
 
+@property (assign) IBOutlet NSWindow *window;
+
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 @end
 
-@implementation TRAppDelegate
+@implementation TRAppDelegate {
+
+@private
+
+    NSButton *_addNameButton;
+    NSTextField *_textField;
+    NSTableView *_tableView;
+
+    NSArray *_forgettables;
+
+    NSMutableArray *_managedObjectContexts;
+}
 
 @synthesize window = _window;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;

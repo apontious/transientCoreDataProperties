@@ -136,7 +136,7 @@
 				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = 4F38FFC6158CEE26006F02E4 /* Build configuration list for PBXProject "Transient" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (

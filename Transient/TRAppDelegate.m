@@ -156,7 +156,7 @@
     [self.textField setStringValue:@""];
 }
 
-// Apontiosu 6/16/2012: Each time we refresh, we switch to a different context, so that we'll get new instances of the managed objects. This tests whether transient properties are actually remembered by the database, or are just associated with individual instances, the same way ivars would be.
+// apontious 6/16/2012: Each time we refresh, we switch to a different context, so that we'll get new instances of the managed objects. This tests whether transient properties are actually remembered by the database, or are just associated with individual instances, the same way ivars would be.
 - (IBAction)refresh:(id)sender {
     NSManagedObjectContext *newManagedObjectContext = [[NSManagedObjectContext alloc] init];
     [newManagedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
@@ -211,7 +211,7 @@
 
 #pragma mark NSTextFieldDelegate
 
-// Apontious 6/16/2012: Only allow adding non-empty names to table, to distinguish from names made nil due to transient property behavior.
+// apontious 6/16/2012: Only allow adding non-empty names to table, to distinguish from names made nil due to transient property behavior.
 - (void)controlTextDidChange:(NSNotification *)notification {
     [self.addNameButton setEnabled:[[self.textField stringValue] length] > 0];
 }

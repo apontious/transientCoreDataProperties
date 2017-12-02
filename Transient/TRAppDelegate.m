@@ -11,15 +11,15 @@
 
 @interface TRAppDelegate () <NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate>
 
-@property (nonatomic, retain) IBOutlet NSButton *addNameButton;
-@property (nonatomic, retain) IBOutlet NSTextField *textField;
-@property (nonatomic, retain) IBOutlet NSTableView *tableView;
+@property (nonatomic, weak) IBOutlet NSButton *addNameButton;
+@property (nonatomic, weak) IBOutlet NSTextField *textField;
+@property (nonatomic, weak) IBOutlet NSTableView *tableView;
 
-@property (assign) IBOutlet NSWindow *window;
+@property (weak) IBOutlet NSWindow *window;
 
-@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (readonly, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
 
@@ -27,23 +27,14 @@
 
 @private
 
-    NSButton *_addNameButton;
-    NSTextField *_textField;
-    NSTableView *_tableView;
-
     NSArray *_forgettables;
 
     NSMutableArray *_managedObjectContexts;
 }
 
-@synthesize window = _window;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize managedObjectContext = __managedObjectContext;
-
-@synthesize addNameButton = _addNameButton;
-@synthesize textField = _textField;
-@synthesize tableView = _tableView;
 
 // Apontious 6/16/2012: Must use this access point, instead of applicationDidFinishLaunching:, if we want to do things before e.g. table view is populated.
 - (void)awakeFromNib {

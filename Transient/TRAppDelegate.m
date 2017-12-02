@@ -93,7 +93,7 @@
         [[NSApplication sharedApplication] presentError:error];
         return nil;
     }
-    __managedObjectContext = [[NSManagedObjectContext alloc] init];
+    __managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [__managedObjectContext setPersistentStoreCoordinator:coordinator];
 
     return __managedObjectContext;
@@ -126,7 +126,7 @@
 
 // apontious 6/16/2012: Each time we refresh, we switch to a different context, so that we'll get new instances of the managed objects. This tests whether transient properties are actually remembered by the database, or are just associated with individual instances, the same way ivars would be.
 - (IBAction)refresh:(id)sender {
-    NSManagedObjectContext *newManagedObjectContext = [[NSManagedObjectContext alloc] init];
+    NSManagedObjectContext *newManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [newManagedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
     [_managedObjectContexts addObject:newManagedObjectContext];
 

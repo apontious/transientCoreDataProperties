@@ -21,16 +21,11 @@
 @property (readonly, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, nonatomic) NSManagedObjectContext *managedObjectContext;
 
+@property (nonatomic, copy) NSArray<NSManagedObject *> *forgettables;
+
 @end
 
-@implementation TRAppDelegate {
-
-@private
-
-    NSArray *_forgettables;
-
-    NSMutableArray *_managedObjectContexts;
-}
+@implementation TRAppDelegate
 
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize managedObjectModel = __managedObjectModel;
@@ -38,9 +33,7 @@
 
 // apontious 6/16/2012: Must use this access point, instead of applicationDidFinishLaunching:, if we want to do things before e.g. table view is populated.
 - (void)awakeFromNib {
-    _managedObjectContexts = [NSMutableArray array];
-    [_managedObjectContexts addObject:self.managedObjectContext];
-    [self.managedObjectContext setStalenessInterval:0.0];
+    [self refresh:nil];
 }
 
 // Creates if necessary and returns the managed object model for the application.
@@ -107,7 +100,7 @@
 #pragma mark Actions
 
 - (IBAction)addName:(id)sender {
-    NSManagedObjectContext *moc = [_managedObjectContexts lastObject];
+    NSManagedObjectContext *moc = self.managedObjectContext;
 
     NSString *name = [self.textField stringValue];
     
@@ -119,41 +112,44 @@
         NSLog(@"Error: %@", error);
     }
 
+    self.forgettables = [self.forgettables arrayByAddingObject:forgettable];
+
     [self.tableView reloadData];
     
     self.textField.stringValue = @""; // Does *not* invoke NSControlTextDidChangeNotification
     self.addNameButton.enabled = NO;
 }
 
-// apontious 6/16/2012: Each time we refresh, we switch to a different context, so that we'll get new instances of the managed objects. This tests whether transient properties are actually remembered by the database, or are just associated with individual instances, the same way ivars would be.
+// apontious 12/2/2017: Previously, we used a different context each time we refreshed.
+// But I don't want to do that anymore, because I want to switch to NSPersistentContainer, which has its own, single main thread context.
+// Turns out, if you don't have a reference to a managed object instance, it will disappear and will be refetched, which is what we want.
 - (IBAction)refresh:(id)sender {
-    NSManagedObjectContext *newManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [newManagedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
-    [_managedObjectContexts addObject:newManagedObjectContext];
+    self.forgettables = nil;
+    [self.tableView reloadData]; // Needed #1 to immediately, consistently forget the managed object instances.
 
-    [self.tableView reloadData];
+    // Needed #2 to immediately, consistently forget the managed object instances.
+    // Give system a runloop cycle to process that there are no references.
+    // This is probably more finicky and time-sensitive than I would like, but it works for now (macOS 10.12).
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSManagedObjectContext *moc = self.managedObjectContext;
+
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        [fetchRequest setEntity:[NSEntityDescription entityForName:@"Forgettable" inManagedObjectContext:moc]];
+
+        NSError *error;
+        NSArray *result = [moc executeFetchRequest:fetchRequest error:&error];
+
+        if (result == nil) {
+            // TODO: error handling
+            NSLog(@"Error: %@", error);
+        }
+
+        self.forgettables = result;
+        [self.tableView reloadData];
+    });
 }
 
 #pragma mark Table Stuff
-    
-- (NSArray *)forgettables {
-    NSManagedObjectContext *moc = [_managedObjectContexts lastObject];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Forgettable" inManagedObjectContext:moc]];
-
-    NSError *error = nil;
-    NSArray *result = [moc executeFetchRequest:fetchRequest error:&error];
-    
-    if (result == nil) {
-        // TODO: error handling
-        NSLog(@"Error: %@", error);
-    }
-    
-    result = [result sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]]];
-    
-    return result;
-}
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     return self.forgettables.count;

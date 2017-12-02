@@ -156,17 +156,17 @@
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return [self.forgettables count];
+    return self.forgettables.count;
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    id result = nil;
+    id result;
     
-    NSManagedObject *forgettable = [self.forgettables objectAtIndex:row];
+    NSManagedObject *forgettable = self.forgettables[row];
     
-    if ([[tableColumn identifier] isEqualToString:@"pointer"] == YES) {
+    if ([tableColumn.identifier isEqualToString:@"pointer"] == YES) {
         result = [NSString stringWithFormat:@"%p", forgettable];
-    } else if ([[tableColumn identifier] isEqualToString:@"name"] == YES) {
+    } else if ([tableColumn.identifier isEqualToString:@"name"] == YES) {
         NSString *name = [forgettable valueForKey:@"name"];
         if (name == nil) {
             result = @"(nil)";

@@ -108,28 +108,25 @@
 // Turns out, if you don't have a reference to a managed object instance, it will disappear and will be refetched, which is what we want.
 - (IBAction)refresh:(id)sender {
     self.forgettables = nil;
-    [self.tableView reloadData]; // Needed #1 to immediately, consistently forget the managed object instances.
 
-    // Needed #2 to immediately, consistently forget the managed object instances.
-    // Give system a runloop cycle to process that there are no references.
-    // This is probably more finicky and time-sensitive than I would like, but it works for now (macOS 10.12).
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSManagedObjectContext *moc = self.managedObjectContext;
+    // Need to do this or lack of current references won't immediately translate into objects being removed from context.
+    [self.managedObjectContext processPendingChanges];
 
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        [fetchRequest setEntity:[NSEntityDescription entityForName:@"Forgettable" inManagedObjectContext:moc]];
+    NSManagedObjectContext *moc = self.managedObjectContext;
 
-        NSError *error;
-        NSArray *result = [moc executeFetchRequest:fetchRequest error:&error];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Forgettable" inManagedObjectContext:moc]];
 
-        if (result == nil) {
-            // TODO: error handling
-            NSLog(@"Error: %@", error);
-        }
+    NSError *error;
+    NSArray *result = [moc executeFetchRequest:fetchRequest error:&error];
 
-        self.forgettables = result;
-        [self.tableView reloadData];
-    });
+    if (result == nil) {
+        // TODO: error handling
+        NSLog(@"Error: %@", error);
+    }
+
+    self.forgettables = result;
+    [self.tableView reloadData];
 }
 
 #pragma mark Table Stuff

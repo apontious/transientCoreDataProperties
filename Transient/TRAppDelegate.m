@@ -21,7 +21,7 @@
 
 @property (nonatomic, copy) NSArray<NSManagedObject *> *forgettables;
 
-@property (nonatomic) NSUInteger order;
+@property (nonatomic) NSUInteger counter;
 
 @property (nonatomic) BOOL useTransient;
 
@@ -101,8 +101,8 @@
     NSManagedObject *forgettable = [NSEntityDescription insertNewObjectForEntityForName:@"Forgettable" inManagedObjectContext:moc];
     [forgettable setValue:name forKey:@"name"];
     
-    self.order++;
-    [forgettable setValue:@(self.order) forKey:@"order"];
+    self.counter++;
+    [forgettable setValue:@(self.counter) forKey:@"name"];
 
     NSError *error;
     if ([moc save:&error] == NO) {
@@ -152,7 +152,7 @@
     _persistentContainer = nil;
 
     // Reset counter.
-    self.order = 0;
+    self.counter = 0;
 
     [self refresh:nil];
 }

@@ -9,6 +9,14 @@
 
 #import "TRAppDelegate.h"
 
+static NSString *const kForgettableEntityName = @"Forgettable";
+static NSString *const kNameAttributeName = @"name";
+static NSString *const kOrderAttributeName = @"order";
+
+static NSString *const kPointerTableColumnIdentifier = @"pointer";
+static NSString *const kNameTableColumnIdentifier = kNameAttributeName;
+static NSString *const kOrderTableColumnIdentifier = kOrderAttributeName;
+
 @interface TRAppDelegate () <NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate>
 
 @property (nonatomic, weak) IBOutlet NSButton *addNameButton;
@@ -40,8 +48,8 @@
             // Must be a copy of the version loaded from the bundle, or it will not be modifiable.
             NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil].copy;
 
-            NSEntityDescription *entityDescription = model.entitiesByName[@"Forgettable"];
-            NSPropertyDescription *propertyDescription = entityDescription.propertiesByName[@"name"];
+            NSEntityDescription *entityDescription = model.entitiesByName[kForgettableEntityName];
+            NSPropertyDescription *propertyDescription = entityDescription.propertiesByName[kNameAttributeName];
             propertyDescription.transient = self.useTransient;
 
             _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"Transient" managedObjectModel:model];
@@ -98,11 +106,11 @@
 
     NSString *name = self.textField.stringValue;
     
-    NSManagedObject *forgettable = [NSEntityDescription insertNewObjectForEntityForName:@"Forgettable" inManagedObjectContext:moc];
-    [forgettable setValue:name forKey:@"name"];
+    NSManagedObject *forgettable = [NSEntityDescription insertNewObjectForEntityForName:kForgettableEntityName inManagedObjectContext:moc];
+    [forgettable setValue:name forKey:kNameAttributeName];
     
     self.counter++;
-    [forgettable setValue:@(self.counter) forKey:@"name"];
+    [forgettable setValue:@(self.counter) forKey:kNameAttributeName];
 
     NSError *error;
     if ([moc save:&error] == NO) {
@@ -129,7 +137,7 @@
     NSManagedObjectContext *moc = self.managedObjectContext;
 
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Forgettable" inManagedObjectContext:moc]];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:kForgettableEntityName inManagedObjectContext:moc]];
 
     NSError *error;
     NSArray *result = [moc executeFetchRequest:fetchRequest error:&error];
@@ -139,7 +147,7 @@
         NSLog(@"Error: %@", error);
     }
 
-    result = [result sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES selector:@selector(compare:)]]];
+    result = [result sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:kOrderAttributeName ascending:YES selector:@selector(compare:)]]];
 
     self.forgettables = result;
     [self.tableView reloadData];
@@ -168,12 +176,12 @@
     
     NSManagedObject *forgettable = self.forgettables[row];
     
-    if ([tableColumn.identifier isEqualToString:@"pointer"] == YES) {
+    if ([tableColumn.identifier isEqualToString:kPointerTableColumnIdentifier] == YES) {
         result = [NSString stringWithFormat:@"%p", forgettable];
-    } else if ([tableColumn.identifier isEqualToString:@"order"] == YES) {
-        result = [forgettable valueForKey:@"order"];
-    } else if ([tableColumn.identifier isEqualToString:@"name"] == YES) {
-        NSString *name = [forgettable valueForKey:@"name"];
+    } else if ([tableColumn.identifier isEqualToString:kOrderTableColumnIdentifier] == YES) {
+        result = [forgettable valueForKey:kOrderTableColumnIdentifier];
+    } else if ([tableColumn.identifier isEqualToString:kNameTableColumnIdentifier] == YES) {
+        NSString *name = [forgettable valueForKey:kNameTableColumnIdentifier];
         if (name == nil) {
             result = @"(nil)";
         } else {

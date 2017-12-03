@@ -773,12 +773,24 @@ DQ
                             <action selector="refresh:" target="494" id="629"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="yZe-W5-ecj">
+                        <rect key="frame" x="393" y="119" width="97" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Transient" bezelStyle="regularSquare" imagePosition="left" inset="2" id="11n-UM-SaW">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="toggleTransient:" target="494" id="LHG-40-r6F"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <connections>
                 <outlet property="delegate" destination="494" id="625"/>
                 <outlet property="initialFirstResponder" destination="540" id="621"/>
             </connections>
+            <point key="canvasLocation" x="131.5" y="243"/>
         </window>
         <customObject id="494" customClass="TRAppDelegate">
             <connections>

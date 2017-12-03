@@ -23,6 +23,8 @@
 
 @property (nonatomic) NSUInteger order;
 
+@property (nonatomic) BOOL useTransient;
+
 @end
 
 @implementation TRAppDelegate
@@ -35,7 +37,14 @@
     // The persistent container for the application. This implementation creates and returns a container, having loaded the store for the application to it.
     @synchronized (self) {
         if (_persistentContainer == nil) {
-            _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"Transient"];
+            // Must be a copy of the version loaded from the bundle, or it will not be modifiable.
+            NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil].copy;
+
+            NSEntityDescription *entityDescription = model.entitiesByName[@"Forgettable"];
+            NSPropertyDescription *propertyDescription = entityDescription.propertiesByName[@"name"];
+            propertyDescription.transient = self.useTransient;
+
+            _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"Transient" managedObjectModel:model];
 
             NSPersistentStoreDescription *storeDescription = [[NSPersistentStoreDescription alloc] init];
             storeDescription.type = NSInMemoryStoreType;
@@ -134,6 +143,18 @@
 
     self.forgettables = result;
     [self.tableView reloadData];
+}
+
+- (IBAction)toggleTransient:(NSButton *)sender {
+    self.useTransient = (sender.state == NSOnState);
+
+    // Force Core Data stack to reset.
+    _persistentContainer = nil;
+
+    // Reset counter.
+    self.order = 0;
+
+    [self refresh:nil];
 }
 
 #pragma mark Table Stuff

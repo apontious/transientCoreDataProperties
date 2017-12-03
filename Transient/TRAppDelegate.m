@@ -110,7 +110,7 @@ static NSString *const kOrderTableColumnIdentifier = kOrderAttributeName;
     [forgettable setValue:name forKey:kNameAttributeName];
     
     self.counter++;
-    [forgettable setValue:@(self.counter) forKey:kNameAttributeName];
+    [forgettable setValue:@(self.counter) forKey:kOrderAttributeName];
 
     NSError *error;
     if ([moc save:&error] == NO) {

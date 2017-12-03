@@ -132,7 +132,7 @@ static NSString *const kOrderTableColumnIdentifier = kOrderAttributeName;
     self.forgettables = nil;
 
     // Need to do this or lack of current references won't immediately translate into objects being removed from context.
-    [self.managedObjectContext processPendingChanges];
+    [self.managedObjectContext reset];
 
     NSManagedObjectContext *moc = self.managedObjectContext;
 

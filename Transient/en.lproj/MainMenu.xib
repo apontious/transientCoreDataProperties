@@ -775,7 +775,7 @@ DQ
                     </button>
                     <button verticalHuggingPriority="750" misplaced="YES" id="yZe-W5-ecj">
                         <rect key="frame" x="393" y="119" width="97" height="18"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Transient" bezelStyle="regularSquare" imagePosition="left" inset="2" id="11n-UM-SaW">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>

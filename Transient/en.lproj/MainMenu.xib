@@ -648,8 +648,8 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="Transient" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+        <window title="Transient" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="503" height="290"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
@@ -692,7 +692,7 @@ DQ
                             <rect key="frame" x="1" y="0.0" width="359" height="208"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="594" id="592" userLabel="Names Table View">
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" autosaveColumns="NO" typeSelect="NO" headerView="fla-Ij-fh1" id="592" userLabel="Names Table View">
                                     <rect key="frame" x="0.0" y="0.0" width="359" height="185"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
@@ -754,7 +754,7 @@ DQ
                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <tableHeaderView key="headerView" id="594">
+                        <tableHeaderView key="headerView" id="fla-Ij-fh1">
                             <rect key="frame" x="0.0" y="0.0" width="359" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>

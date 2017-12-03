@@ -699,7 +699,7 @@ DQ
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn identifier="pointer" width="120" minWidth="120" maxWidth="120" id="626">
+                                        <tableColumn identifier="pointer" editable="NO" width="120" minWidth="120" maxWidth="120" id="626">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Pointer">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -712,7 +712,7 @@ DQ
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         </tableColumn>
-                                        <tableColumn identifier="order" width="70" minWidth="70" maxWidth="70" id="o52-Tl-s3k">
+                                        <tableColumn identifier="order" editable="NO" width="70" minWidth="70" maxWidth="70" id="o52-Tl-s3k">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Order">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -725,7 +725,7 @@ DQ
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         </tableColumn>
-                                        <tableColumn identifier="name" width="160" minWidth="160" maxWidth="3.4028234663852901e+38" id="596">
+                                        <tableColumn identifier="name" editable="NO" width="160" minWidth="160" maxWidth="3.4028234663852901e+38" id="596">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
